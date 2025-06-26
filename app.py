@@ -7,14 +7,14 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
-# IMySQL Configuration for Railway compatibility
+# MySQL Configuration for Railway compatibility
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
-            host=os.environ.get('MYSQLHOST', 'mysql.railway.internal'),
+            host=os.environ.get('MYSQLHOST', 'localhost'),
             user=os.environ.get('MYSQLUSER', 'root'),
-            password=os.environ.get('MYSQL_ROOT_PASSWORD', 'WNEVNWzxxQvrScfDJgltwUdfxYXwJaEM'),
-            database=os.environ.get('MYSQLDATABASE', 'railway'),
+            password=os.environ.get('MYSQLPASSWORD', ''),
+            database=os.environ.get('MYSQLDATABASE', 'job_tracker'),
             port=os.environ.get('MYSQLPORT', 3306)
         )
         return conn
@@ -64,7 +64,7 @@ def validate_job_application(data):
         errors.append(f"Invalid status. Valid options: {', '.join(valid_statuses)}")
     return errors
 
-# API Endpoints
+# API Endpoints with improved error handling
 @app.route('/')
 def home():
     return render_template('index.html')
