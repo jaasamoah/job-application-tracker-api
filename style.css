@@ -1,0 +1,100 @@
+/* Custom styles for the Job Application Tracker API documentation */
+
+/* Ensure proper spacing and typography */
+.container {
+    max-width: 1200px;
+}
+
+/* Icon styling */
+[data-feather] {
+    width: 1.2em;
+    height: 1.2em;
+    vertical-align: middle;
+}
+
+/* Code blocks */
+code {
+    color: var(--bs-info);
+    background-color: var(--bs-dark);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+}
+
+pre {
+    color: var(--bs-light);
+}
+
+pre code {
+    color: inherit;
+    background-color: transparent;
+    padding: 0;
+}
+
+/* Card hover effects */
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Badge styling for HTTP methods */
+.badge {
+    font-size: 0.75em;
+    padding: 0.5em 0.75em;
+}
+
+/* Status badges */
+.badge.fs-6 {
+    font-size: 0.875rem !important;
+    padding: 0.5rem 1rem;
+}
+
+/* API response area */
+#apiResponse {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Button styling */
+.btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Dark theme enhancements */
+[data-bs-theme="dark"] {
+    --bs-body-bg: #0d1117;
+    --bs-body-color: #f0f6fc;
+}
+
+[data-bs-theme="dark"] .card {
+    background-color: #161b22;
+    border-color: #30363d;
+}
+
+[data-bs-theme="dark"] .bg-dark {
+    background-color: #0d1117 !important;
+}
+
+[data-bs-theme="dark"] .border {
+    border-color: #30363d !important;
+}
