@@ -198,8 +198,12 @@ def delete_application(app_id):
     except Exception as e:
         logger.error(f"Error deleting application {app_id}: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
-
+        
+template_dir = os.path.abspath('templates')
+static_dir = os.path.abspath('static')
+app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 @app.route('/api/status-options', methods=['GET'])
+
 def get_status_options():
     """Get valid status options"""
     return jsonify({'statuses': VALID_STATUSES})
