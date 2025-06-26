@@ -1,0 +1,13 @@
+# Core dependencies
+flask==3.0.0
+flask-cors==4.0.0
+
+# Database tools (installed but not used in current in-memory version)
+flask-sqlalchemy==3.1.1
+psycopg2-binary==2.9.9
+
+# Production server
+gunicorn==21.2.0
+
+# Validation utilities
+email-validator==2.0.0.post2
