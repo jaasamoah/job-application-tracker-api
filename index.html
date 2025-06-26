@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Tracker API</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container my-5">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 mb-3">
+                <i data-feather="briefcase" class="me-3"></i>
+                Job Application Tracker API
+            </h1>
+            <p class="lead text-muted">A RESTful API for managing your job applications</p>
+        </div>
+
+        <!-- API Overview -->
+        <div class="row mb-5">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i data-feather="info" class="me-2"></i>
+                            API Overview
+                        </h5>
+                        <p class="card-text">
+                            This API allows you to create, read, update, and delete job applications. 
+                            All data is stored in memory and will be reset when the server restarts.
+                        </p>
+                        <div class="row text-center">
+                            <div class="col-md-3 col-6">
+                                <div class="border rounded p-3 mb-3">
+                                    <i data-feather="plus-circle" class="text-success mb-2"></i>
+                                    <div class="small">Create</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="border rounded p-3 mb-3">
+                                    <i data-feather="eye" class="text-info mb-2"></i>
+                                    <div class="small">Read</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="border rounded p-3 mb-3">
+                                    <i data-feather="edit" class="text-warning mb-2"></i>
+                                    <div class="small">Update</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="border rounded p-3 mb-3">
+                                    <i data-feather="trash-2" class="text-danger mb-2"></i>
+                                    <div class="small">Delete</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Endpoints Documentation -->
+        <div class="mb-5">
+            <h2 class="mb-4">
+                <i data-feather="book" class="me-2"></i>
+                API Endpoints
+            </h2>
+
+            <!-- GET /api/applications -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Get All Applications</h5>
+                        <span class="badge bg-success">GET</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>URL:</strong> <code>/api/applications</code></p>
+                    <p><strong>Query Parameters:</strong></p>
+                    <ul>
+                        <li><code>status</code> (optional) - Filter by application status</li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <div class="bg-dark p-3 rounded">
+                        <code>GET /api/applications?status=Interview</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POST /api/applications -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Create Application</h5>
+                        <span class="badge bg-primary">POST</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>URL:</strong> <code>/api/applications</code></p>
+                    <p><strong>Content-Type:</strong> <code>application/json</code></p>
+                    <p><strong>Required Fields:</strong></p>
+                    <ul>
+                        <li><code>company_name</code> (string) - Name of the company</li>
+                        <li><code>position</code> (string) - Job position title</li>
+                    </ul>
+                    <p><strong>Optional Fields:</strong></p>
+                    <ul>
+                        <li><code>status</code> (string) - Application status (default: "Applied")</li>
+                        <li><code>application_date</code> (string) - ISO date format</li>
+                        <li><code>notes</code> (string) - Additional notes</li>
+                    </ul>
+                    <p><strong>Example Request Body:</strong></p>
+                    <pre class="bg-dark p-3 rounded"><code>{
+  "company_name": "Tech Corp",
+  "position": "Software Engineer",
+  "status": "Applied",
+  "notes": "Applied through company website"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- GET /api/applications/{id} -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Get Single Application</h5>
+                        <span class="badge bg-success">GET</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>URL:</strong> <code>/api/applications/{id}</code></p>
+                    <p><strong>Example:</strong></p>
+                    <div class="bg-dark p-3 rounded">
+                        <code>GET /api/applications/1</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUT /api/applications/{id} -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Update Application</h5>
+                        <span class="badge bg-warning">PUT</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>URL:</strong> <code>/api/applications/{id}</code></p>
+                    <p><strong>Content-Type:</strong> <code>application/json</code></p>
+                    <p><strong>Description:</strong> Update any field of an existing application. Only include fields you want to update.</p>
+                    <p><strong>Example Request Body:</strong></p>
+                    <pre class="bg-dark p-3 rounded"><code>{
+  "status": "Interview",
+  "notes": "Phone screen scheduled for next week"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- DELETE /api/applications/{id} -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Delete Application</h5>
+                        <span class="badge bg-danger">DELETE</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>URL:</strong> <code>/api/applications/{id}</code></p>
+                    <p><strong>Example:</strong></p>
+                    <div class="bg-dark p-3 rounded">
+                        <code>DELETE /api/applications/1</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GET /api/status-options -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Get Status Options</h5>
+                        <span class="badge bg-success">GET</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>URL:</strong> <code>/api/status-options</code></p>
+                    <p><strong>Description:</strong> Get a list of valid status options for job applications.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Options -->
+        <div class="mb-5">
+            <h2 class="mb-4">
+                <i data-feather="tag" class="me-2"></i>
+                Valid Status Options
+            </h2>
+            <div class="row">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <span class="badge bg-secondary fs-6">Applied</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <span class="badge bg-info fs-6">Phone Screen</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <span class="badge bg-warning fs-6">Interview</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <span class="badge bg-primary fs-6">On-site</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <span class="badge bg-danger fs-6">Rejected</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <span class="badge bg-success fs-6">Offer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <span class="badge bg-success fs-6">Accepted</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <span class="badge bg-dark fs-6">Withdrawn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Response -->
+        <div class="mb-5">
+            <h2 class="mb-4">
+                <i data-feather="code" class="me-2"></i>
+                Example Response
+            </h2>
+            <div class="card">
+                <div class="card-body">
+                    <p><strong>Sample Job Application Object:</strong></p>
+                    <pre class="bg-dark p-3 rounded"><code>{
+  "id": 1,
+  "company_name": "Tech Corp",
+  "position": "Software Engineer",
+  "status": "Interview",
+  "application_date": "2025-06-20T10:00:00",
+  "notes": "Phone screen scheduled for next week",
+  "created_at": "2025-06-20T10:00:00",
+  "updated_at": "2025-06-22T14:30:00"
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Test Section -->
+        <div class="mb-5">
+            <h2 class="mb-4">
+                <i data-feather="play-circle" class="me-2"></i>
+                Test the API
+            </h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <button class="btn btn-success w-100" onclick="testGetApplications()">
+                                <i data-feather="list" class="me-2"></i>
+                                Get All Applications
+                            </button>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <button class="btn btn-info w-100" onclick="testStatusOptions()">
+                                <i data-feather="tag" class="me-2"></i>
+                                Get Status Options
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Response:</h6>
+                        <pre id="apiResponse" class="bg-dark p-3 rounded" style="min-height: 100px;">Click a button above to test the API</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-muted mt-5 pt-4 border-top">
+            <p>Job Application Tracker API - Built with Flask</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        // Initialize Feather icons
+        feather.replace();
+
+        async function testGetApplications() {
+            try {
+                const response = await fetch('/api/applications');
+                const data = await response.json();
+                document.getElementById('apiResponse').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('apiResponse').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function testStatusOptions() {
+            try {
+                const response = await fetch('/api/status-options');
+                const data = await response.json();
+                document.getElementById('apiResponse').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('apiResponse').textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
